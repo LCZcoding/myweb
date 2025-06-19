@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/myweb/css/base.css">
+    <link rel="stylesheet" href="/myweb/css/index.css">
+    <style>
+      .profile-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    </style>
+    
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <!--nav begin-->
+<div class="nav">
+ 		<div class="nav_con">
+            <ul>
+              <li>
+             <a href="" class="no1"><img src="/myweb/images/横板生成个人网页 logo.png" alt="" width="60px" height="40px"></a>
+             <a href="/myweb/images/生成个人网页 logo.png" class="no2"><img src="/myweb/images/横板生成个人网页 logo.png" alt="" width="60px" height="40px"></a>
+              </li>
+                <li>
+                    <a  class="no1 choose" >首页</a>
+                    <a  class="no2"href="/myweb/index.html">首页</a>
+                </li>
+                <li>
+                    <a class="no1">作者简介</a>
+                    <a class="no2" href="/myweb/aboutAuthor.html">作者简介</a>
+                </li>
+                <li>
+                    <a class="no1">诗书与远方</a>
+                    <a class="no2" href="/myweb/ookAndDistance.html">诗书与远方</a>
+                </li>
+                <!-- <li>
+                    <a class="no1">宇宙的秘密</a>
+                    <a class="no2" href="universalSecret.html">宇宙的秘密</a>
+                </li> -->
+                <li>
+                    <a class="no1">游戏世界</a>
+                    <a class="no2" href="/myweb/gameWorld.html">游戏世界</a>
+                </li>
+                <!-- <li>
+                    <a class="no1">个人博客</a>
+                    <a class="no2" href="blog.html">个人博客</a>
+                </li> -->
+                <li>
+                    <a class="no1">大家的话</a>
+					          <a class="no2" href="/myweb/sayOfus.html">大家的话</a>
+                </li>
+                <li>
+                    <a  class="no1">联系作者</a>
+					          <a class="no2" href="/myweb/contact.html">联系作者</a>
+                </li>
+            </ul>
+        </div>
+ 	</div> 
+  
+<!--nav end--> 
+<!-- 通告 -->
+<div class="s">
+        <div class="c">
+            重要通知：系统正在升级中，部分功能正在不断完善，请耐心等待。欢迎持续关注本网页，喜欢的话可以加入我。在本月我们将迎来网页制作项目的审核验收。希望各位评委老师，同学给我们一个不错的分数，来支持本网页的创作。<br>
+        </div>
+    </div>
+<!--banner begin-->
+
+<div class="carousel" id="carousel">
+  <div class="slides-container">
+    <div class="slide">
+      <img src="/myweb/images/waterPlant.jpg" alt="Slide 1">
+    </div>
+    <div class="slide">
+      <img src="/myweb/images/horizon4.jpg" alt="Slide 2">
+    </div>
+    <div class="slide">
+      <img src="/myweb/images/japanMountain.jpg" alt="Slide 3">
+    </div>
+    <div class="slide">
+      <img src="/myweb/images/forest.jpg" alt="Slide 4">
+    </div>
+    <div class="slide">
+      <img src="/myweb/images/helanFlowers.jpg" alt="Slide 5">
+    </div>
+  </div>
+
+  <!-- 控制按钮 -->
+  <button class="prev-btn" onclick="prevSlide()">&#10094;</button>
+  <button class="next-btn" onclick="nextSlide()">&#10095;</button>
+
+  <!-- 指示器 -->
+  <div class="indicators" id="indicators"></div>
+</div>
+
+
+
+<!--banner end-->
+
+<br>
+
+<br>
+
+    <div class="wrapper"><div style="text-align: center; margin-bottom: 30px;">
+        <img src="/myweb/images/兰亭序1.jpg" alt="照片" class="profile-photo">
+      <br> 
+      <br>
+        <div class="wrapper1">
+  
+  <audio controls src="/myweb/audio/兰亭序.mp3" style="margin: 0 auto;"></audio>
+ 
+</div>
+        <br>
+        <br>
+        <h1>周杰伦的兰亭序</h1>
+        <br>
+        <br>
+        <h1>感觉不错的话，点几个赞吧，赞的数量可存储到网页</h1>
+         <button id="likeBtn">❤️</button>
+  <span id="likeCount">0</span>
+</div>
+</div>
+
+  <script src="/myweb/javascript/index.js"></script>
+
+  <footer style="text-align: center; padding: 20px; background-color: #7fffd4; border-top: 1px solid #eee; margin-top: 50px; width: 100%;">
+  <p>&copy; 2025 李长卓. 保留所有权利.</p>
+  <p>联系方式: 2481606011@qq.com</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/myweb/css/base.css">
+    <link rel="stylesheet" href="/myweb/css/index.css">
+    <style>
+      /* body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    } */
+    
+    .message-board {
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .message-form {
+      margin-bottom: 30px;
+    }
+    
+    .message-form input,
+    .message-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    
+    .message-form button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    
+    .message-form button:hover {
+      background-color: #45a049;
+    }
+    
+    .message-list {
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    
+    .message-item {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    
+    .message-author {
+      font-weight: bold;
+    }
+    
+    .message-time {
+      color: #888;
+      font-size: 0.9em;
+    }
+    
+    .empty-message {
+      text-align: center;
+      color: #888;
+      padding: 20px 0;
+    }  
+    </style>
+    
+
+
+</head>
+<body>
+  <!--nav begin-->
+<div class="nav">
+ 		<div class="nav_con">
+            <ul>
+                 <li>
+             <a href="" class="no1"><img src="/myweb/images/横板生成个人网页 logo.png" alt="" width="60px" height="40px"></a>
+             <a href="/myweb/images/生成个人网页 logo.png" class="no2"><img src="/myweb/images/横板生成个人网页 logo.png" alt="" width="60px" height="40px"></a>
+              </li>
+                <li>
+                    <a  class="no1" >首页</a>
+                    <a  class="no2"href="/myweb/index.html">首页</a>
+                </li>
+                <li>
+                    <a class="no1">作者简介</a>
+                    <a class="no2" href="/myweb/aboutAuthor.html">作者简介</a>
+                </li>
+                <li>
+                    <a class="no1">诗书与远方</a>
+                    <a class="no2" href="/myweb/bookAndDistance.html">诗书与远方</a>
+                </li>
+                <!-- <li>
+                    <a class="no1">宇宙的秘密</a>
+                    <a class="no2" href="universalSecret.html">宇宙的秘密</a>
+                </li> -->
+                <li>
+                    <a class="no1">游戏世界</a>
+                    <a class="no2" href="/myweb/gameWorld.html">游戏世界</a>
+                </li>
+                <!-- <li>
+                    <a class="no1">个人博客</a>
+                    <a class="no2" href="blog.html">个人博客</a>
+                </li> -->
+                <li>
+                    <a class="no1 choose">大家的话</a>
+					          <a class="no2" href="/myweb/sayOfus.html">大家的话</a>
+                </li>
+                <li>
+                    <a  class="no1">联系作者</a>
+					          <a class="no2" href="/myweb/contact.html">联系作者</a>
+                </li>
+            </ul>
+        </div>
+ 	</div> 
+  
+<!--nav end--> 
+<div class="wrapper">
+    <div class="message-board">
+    <h2>留言板</h2>
+    
+    <!-- 留言表单 -->
+    <div class="message-form">
+      <input type="text" id="author" placeholder="您的昵称（选填，匿名请留空）">
+      <textarea id="content" placeholder="请输入留言内容..." rows="3" required></textarea>
+      <button onclick="submitMessage()">提交留言</button>
+    </div>
+    
+    <!-- 留言列表 -->
+    <div class="message-list" id="messageList"></div>
+  </div>
+</div>
+
+
+  <script>
+    // 最大留言数量
+    const MAX_MESSAGES = 100;
+    
+    // 从localStorage加载留言
+    function loadMessages() {
+      const messages = JSON.parse(localStorage.getItem('messages')) || [];
+      const messageList = document.getElementById('messageList');
+      
+      if (messages.length === 0) {
+        messageList.innerHTML = '<div class="empty-message">暂无留言，快来留下你的想法吧！</div>';
+        return;
+      }
+      
+      // 清空列表
+      messageList.innerHTML = '';
+      
+      // 倒序显示（最新的在最前）
+      messages.slice().reverse().forEach(msg => {
+        const item = document.createElement('div');
+        item.className = 'message-item';
+        item.innerHTML = `
+          <div class="message-header">
+            <span class="message-author">${msg.author || '匿名用户'}</span>
+            <span class="message-time">${new Date(msg.time).toLocaleString()}</span>
+          </div>
+          <p>${msg.content}</p>
+        `;
+        messageList.appendChild(item);
+      });
+    }
+    
+    // 提交留言
+    function submitMessage() {
+      const author = document.getElementById('author').value.trim();
+      const content = document.getElementById('content').value.trim();
+      
+      // 表单验证
+      if (!content) {
+        alert('请输入留言内容');
+        return;
+      }
+      
+      // 创建新留言
+      const newMessage = {
+        author: author || null,
+        content,
+        time: Date.now()
+      };
+      
+      // 获取现有留言
+      let messages = JSON.parse(localStorage.getItem('messages')) || [];
+      
+      // 如果超过最大数量，移除最旧的留言
+      if (messages.length >= MAX_MESSAGES) {
+        messages.shift(); // 删除第一条（最旧的）
+      }
+      
+      // 添加新留言
+      messages.push(newMessage);
+      
+      // 保存到localStorage
+      localStorage.setItem('messages', JSON.stringify(messages));
+      
+      // 清空表单
+      document.getElementById('author').value = '';
+      document.getElementById('content').value = '';
+      
+      // 重新加载留言
+      loadMessages();
+      
+      // 滚动到顶部（显示最新留言）
+      document.getElementById('messageList').scrollTop = 0;
+    }
+    
+    // 页面加载时初始化
+    window.addEventListener('DOMContentLoaded', loadMessages);
+  </script>
+  <br>
+  <br>
+  <br>
+  <br>
+   <footer style="text-align: center; padding: 20px; background-color: #7fffd4; border-top: 1px solid #eee; margin-top: 50px; width: 100%;">
+  <p>&copy; 2025 李长卓. 保留所有权利.</p>
+  <p>联系方式: 2481606011@qq.com</p>
+</footer>
+</body>
+</html>
